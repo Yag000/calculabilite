@@ -143,7 +143,7 @@ Dans les deux exercices suivants, on pourra utiliser (implicitement ou explicite
 		\State \textbf{return} $1$
 		\EndFunction
 	\end{algorithmic}
-	Prour une preuve plus formelle de la calculabilité de cette fonction, on pourra utiliser le lemme~\ref{lem:comp}
+	Pour une preuve plus formelle de la calculabilité de cette fonction, on pourra utiliser le lemme~\ref{lem:comp}
 	ainsi que le théorème Smn (i.e. théorème~\ref{thm:it}).
 
 	Alors on a que
@@ -161,17 +161,17 @@ Dans les deux exercices suivants, on pourra utiliser (implicitement ou explicite
 \end{exercice}
 
 \begin{proof}
-	Il faut montrer que le langage $EQUIV =  \setdef {\encode {M,M'}} {\forall w \in \mots, M(w) = M'(w)}$ vérfie
+	Il faut montrer que le langage $EQUIV =  \setdef {\encode {M,M'}} {\forall w \in \mots, M(w) = M'(w)}$ vérifie
 	$\halt \leqm EQUIV \et \overline{\halt} \leqm EQUIV$.
 
 	Soit $M$ une machine de Turing et $w$ un mot :
 	\begin{itemize}
 		\item On pose $M' =  \fun \_ {M(w); \text{ return } 1}$. \\
 		      $\encode {M,w} \in \halt \iff \encode {M_1, M', w} \in EQUIV$. \\
-			La transformation $\encode M \mapsto \encode {M_1, M', w}$ est bien calcualble, donc $\halt \leqm EQUIV$.
+		      La transformation $\encode M \mapsto \encode {M_1, M', w}$ est bien calculable, donc $\halt \leqm EQUIV$.
 		\item  On pose $M' =  \fun \_ {M(w)}$. \\
 		      $\encode {M,w} \in \overline{\halt} \iff \encode {M_{loop}, M', w} \in L$. \\
-			La transformation $\encode M \mapsto \encode {M_{loop}, M', w}$ est bien calcualble, donc $\overline{\halt} \leqm EQUIV$.
+		      La transformation $\encode M \mapsto \encode {M_{loop}, M', w}$ est bien calculable, donc $\overline{\halt} \leqm EQUIV$.
 	\end{itemize}
 
 	On a donc, d'après le théorème~\ref{thm:leqm_sdec} que $EQUIV$ n'est ni RE ni co-RE.
