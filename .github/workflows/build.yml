@@ -2,9 +2,9 @@ name: Build LaTeX document
 
 on:
   push:
+    paths-ignore: 'code/**'
   pull_request:
-    paths-ignore:
-      - 'code/**'
+    paths-ignore: 'code/**'
 
 jobs:
   build_latex:

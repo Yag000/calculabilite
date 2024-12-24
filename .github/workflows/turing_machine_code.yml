@@ -2,9 +2,9 @@ name: Turing_machine code OCaml
 
 on:
   push:
+    paths: 'code/turing_machine/**'
   pull_request:
-    paths:
-      - 'code/turing_machine/**'
+    paths: 'code/turing_machine/**'
 
 jobs:
   test:

@@ -2,9 +2,9 @@ name: Quines
 
 on:
   push:
+    paths: 'code/quines/**'
   pull_request:
-    paths:
-      - 'code/quines/**'
+    paths: 'code/quines/**'
 
 jobs:
   test:
