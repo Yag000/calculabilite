@@ -1,6 +1,10 @@
 name: Quines
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
+    paths:
+      - 'code/quines/**'
 
 jobs:
   test:
