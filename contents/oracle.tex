@@ -1,0 +1,55 @@
+\section{Machines de Turing à oracle}
+
+Nous allons présenter une extension des Machines de Turing qui nous sera utile pour la section suivante.
+
+
+\begin{definition}[Machine de Turing à oracle]
+	Une machine à oracle est une machine de Turing qui a acces à une fonction $\fmots {\mathscr O}$ pendant son exécution. Elle a donc, en plus de la machine
+	initiale, un ruban d'appel (pour l'oracle) et un état spécial d'appel.
+
+	Si la machine rentre dans l'état d'appel avec $u \in \mots$ sur le ruban, alors $\mathscr O (u) \in \mots$ est écrit sur le ruban d'appel.
+\end{definition}
+
+\begin{definition}[Reconnaissance]
+	On dit que $M$ reconnait $L$ relativement à un oracle~$A$ si
+	$$ \forall w, M^A (w) = 1 \iff w \in L $$
+	où $M^A$ est l'exécution de $M$ avec l'oracle~$A$.
+\end{definition}
+
+\begin{definition}[Reduction de Turing]
+	On dit que $A \leqt B \iff A$ est décidable relativement à~$B$.
+\end{definition}
+
+\begin{remarque}
+	On a que $A \leqm B \implies A \leqt B$. En effet, il suffit de construire la machine à oracle qui sur $w$ appelle l'oracle sur $f(w)$, où $f$ est la fonction de reduction.
+\end{remarque}
+
+\begin{remarque}
+	Pour tout langage $L$, on a que $L \leqt \bar L \et \bar L \leqt L$ et donc $L \equivt \bar L$.
+\end{remarque}
+
+
+\begin{lemma}
+	Si $A$ est $C$-complet et $Y \in C$, alors :
+	$$X \text{ est } re(Y) \implies X \text{ est } re(A)$$
+\end{lemma}
+
+\begin{proof}
+	Par définition, $X \text{ est } re(Y)$ s'il existe une machine à oracle $M$ telle que $X$ est reconnu par $M^Y$.
+	Comme $A$ est $C$-complet et $Y \in C$, il existe une réduction calculable $f$ de $Y$ vers $A$.
+	On pose $N$ la machine à oracle construite à partir de $M$ et qui applique $f$ au ruban d'appel, avan chaque appel à l'oracle.
+	Autrement dit, pour tout oracle ${\mathscr O}$ et toute entrée $w$, $N^{{\mathscr O}}(w) = M^{{\mathscr O} \circ f}$.
+	On a donc que $N^A$ reconnaît $X$.
+\end{proof}
+
+
+\begin{definition}[eval avec oracle]
+	$eval(\encode M, \sigma,w,t)$ évalue $M^{\sigma}(w)$ en un nombre d'étapes inférieur à $t$.
+\end{definition}
+
+
+\begin{notation}
+	$\phi_{c \in \mots}$ : énumeration des fonctions calculables.
+
+	$\phi_{c \in \mots}^X$ : énumeration des fonctions calculables relativement à $X$. Et donc $\phi_{\encode M}^X(w) = M^X(w)$
+\end{notation}

@@ -35,8 +35,8 @@ sous forme prénexe et voir comment les classifier.
 	Pour tout $\phi$ il existe $\phi_1$ et $\phi_2$ tels que :
 	$$ \forall x_1, \forall x_2, \phi (x_1,x_2) \iff \forall x, \phi(\phi_1(x), \phi_2(x))$$
 	Le même résultat peut être obtenu pour le quantificateur existentiel.
-	Cette propriété découle du fait que $\N \cong \N \times \N$ et qu'il existe un tel encodage des paires d'entiers qui peut être décodé 
-	via une formule $\Delta_0$. On pourra trouver quelques exemples de fonctions de couplage comme celle de Cantor ici~\url{https://en.wikipedia.org/wiki/Pairing\_function}).
+	Cette propriété découle du fait que $\N \cong \N \times \N$ et qu'il existe un tel encodage des paires d'entiers qui peut être décodé
+	via une formule $\Delta_0$. On pourra trouver quelques exemples de fonctions de couplage comme celle de Cantor ici:~\url{https://en.wikipedia.org/wiki/Pairing\_function}.
 \end{lemma}
 
 \begin{prop}\label{prop:D0-dec}
@@ -48,18 +48,7 @@ sous forme prénexe et voir comment les classifier.
 	fini.
 \end{proof}
 
-
-Dans cette section, nous allons étudier les relations entres ces ensembles afin de pouvoir les classifier, aboutissant à la hiérarchie de la Figure \ref{fig:arith-hier}.
-
-
-\begin{figure}[h]
-	\begin{center}
-		\includegraphics[height=7cm]{./images/Arithmetic_hierarchy.png}
-	\end{center}
-	\caption{Hiérarchie arithmétique}
-	\label{fig:arith-hier}
-\end{figure}
-
+\subsubsection{Quelques exemples}
 
 \begin{exercice}
 	Montrer que $ACCEPT = \setdef {\encode {M,w}} {M(w) = 1} \in \Sigma_1$
@@ -70,7 +59,6 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 
 	Ainsi, $\phi$ décrit $ACCEPT$ et $\phi \in \Sigma_1$ et donc $ACCEPT \in \Sigma_1$.
 \end{proof}
-
 
 \begin{exercice}
 	Montrer que $ACCEPT$ est $\Sigma_1$-complet, \ie
@@ -90,59 +78,27 @@ Dans cette section, nous allons étudier les relations entres ces ensembles afin
 \end{prop}
 
 \begin{proof}
-D'après la proposition~\ref{prop:sd-spec} :
+	D'après la proposition~\ref{prop:sd-spec} :
 	$$L \text{ est r.e.} \Rightarrow \exists L_d \text{ décidable }, L = \setdef {w} {\overbrace{\exists w', \underbrace{\encode {w, w'} \in L_d}_{\in \Delta_0}}^{\in \Sigma_1}}$$
-Inversement, $$L \in \Sigma_1 \iff L = \{w\ |\ \exists w', \phi(w, w')\} \text{ avec } \phi \in  \Delta_0$$.
-Semi-décider $w\in L$ revient alors à énumérer les $w'$ jusqu'à trouver en trouver un tel que $\phi (w, w')$, que l'on peut décider d'après la proposition~\ref{prop:D0-dec}.
+	Inversement, $$L \in \Sigma_1 \iff L = \{w\ |\ \exists w', \phi(w, w')\} \text{ avec } \phi \in  \Delta_0$$
+	Semi-décider $w\in L$ revient alors à énumérer les $w'$ jusqu'à trouver en trouver un tel que $\phi (w, w')$, que l'on peut décider d'après la proposition~\ref{prop:D0-dec}.
 	Et donc $RE = \Sigma_1$
 \end{proof}
 
-\subsection{Machines à oracle}
-
-\begin{definition}[Machine de Turing à oracle]
-	Une machine à oracle est une machine de Turing qui a acces à une fonction $\fmots {\mathscr O}$ pendant son exécution. Elle a donc, en plus de la machine
-	initiale, un ruban d'appel (pour l'oracle) et un état spécial d'appel.
-
-	Si la machine rentre dans l'état d'appel avec $u \in \mots$ sur le ruban, alors $\mathscr O (u) \in \mots$ est écrit sur le ruban d'appel.
-\end{definition}
-
-\begin{definition}[Reconnaissance]
-	On dit que $M$ reconnait $L$ relativement à un oracle~$A$ si
-	$$ \forall w, M^A (w) = 1 \iff w \in L $$
-	où $M^A$ est l'exécution de $M$ avec l'oracle~$A$.
-\end{definition}
-
-\begin{definition}[Reduction de Turing]
-	On dit que $A \leqt B \iff A$ est décidable relativement à~$B$.
-\end{definition}
-
-\begin{remarque}
-	On a que $A \leqm B \implies A \leqt B$. En effet, il suffit de construire la machine à oracle qui sur $w$ appelle l'oracle sur $f(w)$, où $f$ est la fonction de reduction.
-\end{remarque}
-
-\begin{remarque}
-	Pour tout langage $L$, on a que $L \leqt \bar L \et \bar L \leqt L$ et donc $L \equivt \bar L$.
-\end{remarque}
-
-
-\begin{lemma}
-	Si $A$ est $C$-complet et $Y \in C$, alors :
-	$$X \text{ est } re(Y) \implies X \text{ est } re(A)$$
-\end{lemma}
-
-\begin{proof}
-	Par définition, $X \text{ est } re(Y)$ s'il existe une machine à oracle $M$ telle que $X$ est reconnu par $M^Y$.
-	Comme $A$ est $C$-complet et $Y \in C$, il existe une réduction calculable $f$ de $Y$ vers $A$.
-	On pose $N$ la machine à oracle construite à partir de $M$ et qui applique $f$ au ruban d'appel, avan chaque appel à l'oracle.
-	Autrement dit, pour tout oracle ${\mathscr O}$ et toute entrée $w$, $N^{{\mathscr O}}(w) = M^{{\mathscr O} \circ f}$.
-	On a donc que $N^A$ reconnaît $X$.
-	
-\end{proof}
-
-
 \subsection{Hiérarchie arithmétique}
 
-\begin{theorem}[de Post]
+Dans cette section, nous examinons les relations entre ces ensembles afin de les classifier, ce qui conduit à la hiérarchie illustrée dans la Figure \ref{fig:arith-hier}.
+On démontrera que ces ensembles forment une suite croissante (\ref{thm:post}), que chaque ensemble contient un élément complet pour cette classe (\ref{sec:strict})
+
+\begin{figure}[h]
+	\begin{center}
+		\includegraphics[height=7cm]{./images/Arithmetic_hierarchy.png}
+	\end{center}
+	\caption{Hiérarchie arithmétique}
+	\label{fig:arith-hier}
+\end{figure}
+
+\begin{theorem}[de Post] \label{thm:post}
 	Nous avons les résultats suivants :
 	\begin{enumerate}
 		\item \label{thm:post-1}
@@ -164,13 +120,8 @@ Semi-décider $w\in L$ revient alors à énumérer les $w'$ jusqu'à trouver en 
 	\end{enumerate}
 \end{theorem}
 
-
-\begin{definition}[eval avec oracle]
-	$eval(\encode M, \sigma,w,t)$ évalue $M^{\sigma}(w)$ en un nombre d'étapes inférieur à $t$.
-\end{definition}
-
 \begin{proof}[Démonstration du point \ref{thm:post-1a} \bimpRL]
-    \ \newline
+	\ \newline
 	$L$ est calculable relativement à $A \in \Pi_n$ via la machine $M_L$.
 
 	\begin{eqnarray*}
@@ -188,17 +139,10 @@ Semi-décider $w\in L$ revient alors à énumérer les $w'$ jusqu'à trouver en 
 
 \subsubsection{$\Sigma_n$ complétude}
 
-\begin{notation}
-	$\phi_{c \in \mots}$ : énumeration des fonctions calculables.
-
-	$\phi_{c \in \mots}^X$ : énumeration des fonctions calculables relativement à $X$. Et donc $\phi_{\encode M}^X(w) = M^X(w)$
-\end{notation}
-
 \begin{definition}[Saut de Turing]
 	Soit $X$ un langage,
 
 	$X' = \setdef c {\phi_c^X(c) \text{ est défini}} = \setdef {\encode M} {M^X \text{ s'arrête sur } \encode M}$
-
 \end{definition}
 
 
@@ -247,10 +191,15 @@ Semi-décider $w\in L$ revient alors à énumérer les $w'$ jusqu'à trouver en 
 \end{proofI}
 
 
+\begin{lemma}
+	$\forall n, \ \emptyset^{(n)}$ est $\Sigma_n$-complet.
+\end{lemma}
 
+\begin{remarque}
+	Ce lemme montre en particulier le point \ref{thm:post-2} du théorème de Post.
+\end{remarque}
 
-\begin{proof}[Démonstration du point \ref{thm:post-2}]
-	Il faut donc montrer que $\forall n, \emptyset^{(n)}$ est $\Sigma_n$-complet.
+\begin{proof}
 	La démonstration est faite par induction. Les cas $n=0$ et $n=1$ on été traités précédemment, il suffit alors de montrer le cas d'induction.
 
 	Supposons $\emptyset^{(n)} \ \Sigma_n$-complet.
@@ -277,7 +226,7 @@ Semi-décider $w\in L$ revient alors à énumérer les $w'$ jusqu'à trouver en 
 \end{proof}
 
 
-\subsubsection{La hiérarchie ne s'effondre pas}
+\subsubsection{La hiérarchie ne s'effondre pas}\label{sec:strict}
 
 On s'intéresse maintenant à savoir si la hiérarchie est stricte, \ie, $\exists \phi \in \Sigma_{n+1}, \text{ \tq }, \phi \notin \Sigma_n \et \phi \notin \Pi_n$.
 
